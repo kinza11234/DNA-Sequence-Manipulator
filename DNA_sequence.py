@@ -20,8 +20,19 @@ class DNA(Sequence):
     ''' now creates a new class called DNA '''
     def reverse_complement(self):
         complement_dict = {'A': 'T', 'T': 'A', 'C': 'G', 'G': 'C'}
-        reverse_seq = self.sequence[:-1]
-        return complement_seq
+        reverse_seq = self.sequence[::-1]
+        reverse_complement_seq = ''
+        for nucleotide in reverse_seq:
+            if nucleotide == 'A':
+                reverse_complement_seq = reverse_complement_seq + 'T'
+            elif nucleotide == 'T':
+                reverse_complement_seq = reverse_complement_seq + 'A'
+            elif nucleotide == 'C':
+                reverse_complement_seq = reverse_complement_seq + 'G'
+            elif nucleotide == 'G':
+                reverse_complement_seq = reverse_complement_seq + 'C'
+
+        return reverse_complement_seq
 
     def find_pattern(self, pattern): #each returns wherever indices and pattern occur
         indices = []
@@ -35,9 +46,9 @@ class DNA(Sequence):
         gc_count = self.sequence('GC')
         return (gc_count / len(self.sequence)) * 100 if len(self.sequence) > 0 else 0
 
-    if __name__ == '__main__': #creating the example
-        dna_sequence = 'ATGCAAGG'
-        dna = DNA(dna_sequence)
+        if __name__ == '__main__': #creating the example
+            dna_sequence = 'ATGCAAGG'
+            dna = DNA(dna_sequence)
 
         seq_length = dna.calculate_length()
         count_nucleotid = dna.count_nucleotides()
